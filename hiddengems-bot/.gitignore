@@ -1,9 +1,0 @@
-__pycache__/
-*.py[cod]
-*.egg-info/
-build/
-dist/
-
-# Native example builds
-examples/rust/target/
-examples/cpp/build/
