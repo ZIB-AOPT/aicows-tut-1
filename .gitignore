@@ -1,0 +1,16 @@
+# Local scratch bot: everyone writes their own, so it is not shared here.
+# Delete these two lines if you do want to commit yours.
+/mybot/
+/tests/test_mybot.py
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# Rust and C++ build output
+target/
+**/build/

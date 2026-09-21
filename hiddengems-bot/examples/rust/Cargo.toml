@@ -1,0 +1,11 @@
+[package]
+name = "hiddengems-bot"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+serde_json = "1.0"
+tungstenite = { version = "=0.30.0", features = ["rustls-tls-native-roots"] }
+# Select a crypto provider explicitly for tungstenite's rustls transport.
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12"] }

@@ -1,10 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "aicoding"
 version = "0.1.0"
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "gurobipy>=13,<14",
+    "hiddengems-bot-kit",
 ]
+
+# `uv run mybot` needs a real entry point; without one uv falls back to running
+# the mybot/ directory, which puts that directory on sys.path instead of the
+# repository root and breaks `import mybot.strategy`.
+[project.scripts]
+mybot = "mybot.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["mybot"]
+# mybot/ is deliberately in .gitignore; without this hatchling would honour that
+# and leave the package out of the install, breaking the `mybot` command.
+ignore-vcs = true
+
+# The Hidden Gems bot kit lives in this repository and is installed into the
+# project environment, so bots run with plain `uv run`.
+[tool.uv.workspace]
+members = ["hiddengems-bot"]
+
+[tool.uv.sources]
+hiddengems-bot-kit = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -12,3 +37,18 @@ dev = [
     "pytest",
     "ruff",
 ]
+
+# hiddengems-bot/ is vendored from the Hidden Gems arena project. Keep it out of
+# this project's checks so it stays as close to its upstream source as possible.
+[tool.ruff]
+extend-exclude = ["hiddengems-bot"]
+
+[tool.pyright]
+exclude = ["**/node_modules", "**/__pycache__", "**/.*", "hiddengems-bot"]
+# Resolve `import hiddengems...` from the kit's sources: the editable install
+# uses an import hook that static analysis cannot follow.
+extraPaths = ["hiddengems-bot"]
+
+# Let tests at the repository root import top-level packages such as `mybot`.
+[tool.pytest.ini_options]
+pythonpath = ["."]
