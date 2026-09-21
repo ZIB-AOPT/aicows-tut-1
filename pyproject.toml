@@ -1,0 +1,14 @@
+[project]
+name = "aicoding"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "gurobipy>=13,<14",
+]
+
+[dependency-groups]
+dev = [
+    "pyright",
+    "pytest",
+    "ruff",
+]
