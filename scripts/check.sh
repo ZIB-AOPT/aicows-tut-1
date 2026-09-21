@@ -13,7 +13,7 @@ uv run pyright
 echo "== Python tests =="
 uv run pytest
 
-if find . -name Cargo.toml -not -path './target/*' -not -path './hiddengems-bot/*' -print -quit | grep -q .; then
+if find . -name Cargo.toml -not -path './target/*' -print -quit | grep -q .; then
     echo "== Rust format =="
     cargo fmt --check
 
