@@ -4,7 +4,16 @@ version = "0.1.0"
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "gurobipy>=13,<14",
+    "hiddengems-client",
 ]
+
+# The Hidden Gems bot kit lives in kit/ and is installed into the project
+# environment, so bots and checks run with plain `uv run`.
+[tool.uv.workspace]
+members = ["kit"]
+
+[tool.uv.sources]
+hiddengems-client = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -12,3 +21,8 @@ dev = [
     "pytest",
     "ruff",
 ]
+
+# Resolve `import hiddengems...` from the kit's sources: the editable install
+# uses an import hook that static analysis cannot follow.
+[tool.pyright]
+extraPaths = ["kit"]
