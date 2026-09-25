@@ -28,7 +28,7 @@ would rather restructure — your own project, a different file name, several
 files — drop the block and run your class through the client instead:
 
 ```sh
-.venv/bin/python -m hiddengems.play --strategy src/hunter.py:Hunter
+.venv/bin/python -m hiddengems.play --strategy src/my_improved_bot.py:MyImprovedBot
 ```
 
 ## 3. Check it without a server
