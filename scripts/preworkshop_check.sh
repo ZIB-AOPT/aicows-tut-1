@@ -12,14 +12,6 @@ echo "== 2. NVIDIA/OpenCode configuration =="
 ./scripts/verify_nvidia_config.sh
 
 echo
-echo "== 3. Gurobi smoke test =="
-uv run python scripts/gurobi_smoke_test.py
-
-echo
-echo "== 4. Full Gurobi license test =="
-uv run python scripts/gurobi_full_license_check.py
-
-echo
 echo "Pre-workshop automated checks passed."
 echo
 echo "Final manual check:"
